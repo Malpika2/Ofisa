@@ -1,13 +1,79 @@
+<style type="text/css">
+.thank-you-pop{
+	width:100%;
+ 	padding:20px;
+	text-align:center;
+}
+.thank-you-pop h1{
+	font-size: 42px;
+    margin-bottom: 25px;
+	color:#5C5C5C;
+}
+.thank-you-pop p{
+	font-size: 20px;
+    margin-bottom: 27px;
+ 	color:#5C5C5C;
+}
+.thank-you-pop h3{
+	font-size: 25px;
+    margin-bottom: 10px;
+	color:#222;
+	display:block;
+	text-align:left;
+	padding:0px 10px;
+	clear:both;
+	font-weight:normal;
+}
+#modal9 .modal-header{
+    border:0px;
+}
+#ui-id-1{
+	z-index: 1500;
+}
+#ui-id-1:hover{
+	color: blue;
+}
+#ui-menu-item-wrapper:hover{
+	background-color: red !important;
+	color:red;
+}
+#ui-menu-item-wrapper{
+	background-color: blue !important;
+	color:blue;
+}
+.ui-autocomplete .ui-menu-item-wrapper {
+	display: block;
+	color: inherit;
+	background-color: blue;
+	border-color: blue;
+	padding: 7px 15px;
+}
+.ui-autocomplete:hover .ui-menu-item-wrapper:hover {
+	display: block;
+	color: inherit;
+	background-color: blue;
+	border-color: blue;
+	padding: 7px 15px;
+}
+.form-control .ui-autocomplete-input{
+	display: block;
+	color: inherit;
+	background-color: blue;
+	border-color: blue;
+	padding: 7px 15px;	
+}
+</style>
 <!-- Income Cards -->
 <div class="card g-brd-gray-light-v7 g-mb-30">
     <header class="media g-pa-15 g-pa-25-30-0--md g-mb-20">
       <div class="media-body align-self-center">
         <h3 class="text-uppercase g-font-size-default g-color-black g-mb-8">Historial de recados</h3>
-
+			
         <div id="rangePickerWrapper3" class="u-datepicker-left u-datepicker--v3 g-pr-10">
           <input id="rangeDatepicker3" class="g-font-size-12 g-font-size-default--md" type="text" data-rp-wrapper="#rangePickerWrapper3" data-rp-type="range" data-rp-date-format="d M Y" data-rp-default-date='["01 Jan 2016", "31 Dec 2017"]'>
           <i class="hs-admin-angle-down g-absolute-centered--y g-right-0 g-color-gray-light-v3"></i>
         </div>
+        <button type="button" href="#modal9" class="btn btn-success float-right text-center" data-target="#modal9" data-toggle="modal" data-modal-effect="superscaled"><i class="fa fa-plus-square fa-2x"></i>&nbsp;<b style="vertical-align: super;">Nuevo</b></button>
       </div>
     </header>
     <div class="js-custom-scroll g-height-500 g-pa-15 g-pa-0-30-25--md">
@@ -139,3 +205,44 @@
 		]' data-labels='["2013", "2014", "2015", "2016", "2017"]'></div>
 </div>
 <!-- End Income Cards -->
+
+<div class="modal fade" id="modal9" tabindex="-1" role="dialog" aria-labelledby="modal9Label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class=" modal-header mx-auto">
+        <h1 class="modal-title " id="exampleModalLabel">NUEVO RECADO</h1>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div class="thank-you-pop">
+      		<h3>Técnico:</h3>
+	        <select name="tecnico" required style="height: 3em" class="custom-select w-100 u-select-v2 u-shadow-v19  g-color-black g-color-success--hover g-bg-white text-left g-rounded-30 g-pl-30 g-py-12" data-placeholder="Técnico" data-open-icon="fa fa-angle-down" data-close-icon="fa fa-angle-up">
+	        	<option selected="" disabled value="">Listado de Técnicos</option>
+	        </select>
+	        <h3>Cliente:</h3>
+	        <div id="custom-search-input">
+                <div class="input-group">
+                    <input id="cliente" name="cliente" type="text" class="form-control" placeholder="Cliente" />
+                </div>
+            </div>
+	        <h3>Tel. Cliente:</h3>
+	        <input name="tel_cliente" type="text" class="form-control g-color-black g-rounded-30 u-shadow-v19  g-bg-white g-font-size-16 g-rounded-30 g-px-30 g-py-13 " id="Telefono" placeholder="Telefono">
+	        <!-- Textarea Expandable -->
+			<div class="form-group g-mb-20">
+				<h3 class="g-mb-10" for="inputGroup2_2">Asunto</h3>
+				<textarea name="asunto" required id="inputGroup2_3" class="form-control form-control-md u-textarea-expandable rounded-0" rows="3" placeholder="Recado..."></textarea>
+				<small class="form-text text-muted g-font-size-default g-mt-10">
+			    	<strong>Se registrará con la fecha:</strong><?php echo date('d-m-Y',time()); ?>
+			    </small>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-info">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>

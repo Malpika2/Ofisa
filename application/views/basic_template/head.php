@@ -39,4 +39,10 @@
 
   <!-- CSS Customization -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/custom.css">
+
+<!-- CSS Implementing Plugins -->
+  <link  rel="stylesheet" href="<?php echo base_url();?>/assets/vendor/slick-carousel/slick/slick.css">
+  <link  rel="stylesheet" href="<?php echo base_url();?>/assets/vendor/jquery-ui/themes/base/jquery-ui.min.css">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
 </head>

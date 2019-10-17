@@ -9,12 +9,14 @@
 
 
   <!-- jQuery UI Core -->
+
   <script src="<?php  echo base_url();?>assets/vendor/jquery-ui/ui/widget.js"></script>
   <script src="<?php  echo base_url();?>assets/vendor/jquery-ui/ui/version.js"></script>
   <script src="<?php  echo base_url();?>assets/vendor/jquery-ui/ui/keycode.js"></script>
   <script src="<?php  echo base_url();?>assets/vendor/jquery-ui/ui/position.js"></script>
   <script src="<?php  echo base_url();?>assets/vendor/jquery-ui/ui/unique-id.js"></script>
   <script src="<?php  echo base_url();?>assets/vendor/jquery-ui/ui/safe-active-element.js"></script>
+  <script src="<?php  echo base_url();?>assets/vendor/jquery-ui/jquery-ui.js"></script>
 
   <!-- jQuery UI Helpers -->
   <script src="<?php  echo base_url();?>assets/vendor/jquery-ui/ui/widgets/menu.js"></script>
@@ -48,8 +50,12 @@
 
   <!-- JS Custom -->
   <!-- <script src="<?php  echo base_url();?>assets/js/custom.js"></script> -->
-
   <!-- JS Plugins Init. -->
+  <script src="<?php echo base_url();?>/assets/vendor/chosen/chosen.jquery.js"></script>
+  <!-- JS Unify -->
+  <script src="<?php echo base_url();?>/assets/js/components/hs.select.js"></script>
+
+
   <script>
     $(document).on('ready', function () {
       // initialization of custom select
@@ -110,4 +116,38 @@
         }
       });
     });
+
   </script>
+  <!-- JS Plugins Init. -->
+<script >
+  $(document).ready(function () {
+    // initialization of custom select
+    $.HSCore.components.HSSelect.init('.js-custom-select');
+
+    // initialization of forms
+    $.HSCore.components.HSDatepicker.init('#datepickerInline');
+  }); 
+</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+    $( "#cliente" ).autocomplete({
+ 
+        source: function(request, response) {
+            $.ajax({
+            url: "<?php echo base_url('digital/Backend/get_autocomplete/?');?>",
+            data: {
+                    term : request.term
+             },
+            dataType: "json",
+            success: function(data){
+               var resp = $.map(data,function(obj){
+                    return obj.Nombre;
+               }); 
+               response(resp);
+            }
+        });
+    },
+    minLength: 1
+ });
+});
+</script>

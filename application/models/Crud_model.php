@@ -66,4 +66,10 @@ class Crud_model  extends CI_Model
 		$this->db->delete($tabla);
 		return true;
 	}
+	public function getlike($tabla='',$order_by ='',$like_index='',$like_search='',$limit='10'){
+        $this->db->like($like_index, $like_search , 'both');
+        $this->db->order_by($order_by, 'ASC');
+        $this->db->limit($limit);
+        return $this->db->get($tabla)->result();
+	}
 }
