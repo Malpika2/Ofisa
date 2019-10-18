@@ -141,7 +141,7 @@
             dataType: "json",
             success: function(data){
                var resp = $.map(data,function(obj){
-                    return obj.Nombre;
+                    return obj.Nombre+' '+obj.ApellidoP;
                }); 
                response(resp);
             }

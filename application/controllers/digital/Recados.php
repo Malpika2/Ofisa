@@ -20,7 +20,14 @@ class Recados extends CI_Controller
 		$this->load->view('basic_template/main_view',$data);	
 	}
 	public function getHistorialRecados($data){
-
+		$data['tecnicos'] = $this->Crud_model->getWhereJoin('tecnicos','*',array('tecnicos.estatus_tecnico'=>'ACTIVO'),'datos_generales','tecnicos.id_datos_generales = datos_generales.id_datos_generales','LEFT');
+		$data['recados'] = $this->Crud_model->getAllJoin('recados','recados.*,tecnicos.nombre,tecnicos.apellidoP','tecnicos','recados.id_tecnico = tecnicos.id_tecnico','LEFT');
 		return $this->load->view('recados/tabla_recados',$data,true);
+	}
+	public function guardar_recado(){
+		$data = $_POST;
+		$this->Crud_model->insert('recados',array('id_tecnico'=>$data['tecnico'],'id_cliente'=>$data['cliente'],'telefono_cliente'=>$data['tel_cliente'],'asunto'=>$data['asunto'],'fecha_registro'=>time(),'estatus_recado'=>'ENVIADO','notificacion_whatsapp'=>$data['notificacion_whatsapp'],'notificacion_correo'=>$data['notificacion_correo']));
+		$vista = $this->getHistorialRecados($data);
+		echo $vista;
 	}
 }

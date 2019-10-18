@@ -30,38 +30,6 @@
 #ui-id-1{
 	z-index: 1500;
 }
-#ui-id-1:hover{
-	color: blue;
-}
-#ui-menu-item-wrapper:hover{
-	background-color: red !important;
-	color:red;
-}
-#ui-menu-item-wrapper{
-	background-color: blue !important;
-	color:blue;
-}
-.ui-autocomplete .ui-menu-item-wrapper {
-	display: block;
-	color: inherit;
-	background-color: blue;
-	border-color: blue;
-	padding: 7px 15px;
-}
-.ui-autocomplete:hover .ui-menu-item-wrapper:hover {
-	display: block;
-	color: inherit;
-	background-color: blue;
-	border-color: blue;
-	padding: 7px 15px;
-}
-.form-control .ui-autocomplete-input{
-	display: block;
-	color: inherit;
-	background-color: blue;
-	border-color: blue;
-	padding: 7px 15px;	
-}
 </style>
 <!-- Income Cards -->
 <div class="card g-brd-gray-light-v7 g-mb-30">
@@ -80,14 +48,54 @@
       <table class="table table-responsive-sm w-100">
         <thead>
           <tr>
-            <th class="g-font-weight-300 g-color-gray-dark-v6 g-brd-top-none g-pl-20">#</th>
-            <th class="g-font-weight-300 g-color-gray-dark-v6 g-brd-top-none">Tecnico</th>
-            <th class="g-font-weight-300 g-color-gray-dark-v6 g-brd-top-none">Estatus</th>
-            <th class="g-font-weight-300 g-color-gray-dark-v6 g-brd-top-none">Fecha</th>
-            <th class="text-right g-font-weight-300 g-color-gray-dark-v6 g-brd-top-none">Detalles</th>
+            <th class="text-center g-font-weight-300 g-color-gray-dark-v6 g-brd-top-none g-pl-20">#</th>
+            <th class="text-center g-font-weight-300 g-color-gray-dark-v6 g-brd-top-none">Tecnico</th>
+            <th class="text-center g-font-weight-300 g-color-gray-dark-v6 g-brd-top-none">Estatus</th>
+            <th class="text-center g-font-weight-300 g-color-gray-dark-v6 g-brd-top-none">Fecha registro</th>
+            <th class="text-center g-font-weight-300 g-color-gray-dark-v6 g-brd-top-none">Detalles</th>
+            <th class="text-center g-font-weight-300 g-color-gray-dark-v6 g-brd-top-none">
+            Notificación
+            </th>
           </tr>
         </thead>
         <tbody>
+	        <?php foreach ($recados as $recado): ?>
+	        	<?php 
+		        	switch($recado->estatus_recado){
+		        		case 'ENVIADO':
+		        			$clase_estatus='u-tags-v1 text-center g-width-100 g-brd-around g-brd-lightred-v2 g-bg-lightred-v2 g-font-size-default g-color-white g-rounded-50 g-py-4 g-px-15';
+		        			break;
+	        			case 'ATENDIDO':
+	        				$clase_estatus='u-tags-v1 text-center g-width-100 g-brd-around g-brd-teal-v2 g-bg-teal-v2 g-font-size-default g-color-white g-rounded-50 g-py-4 g-px-15';
+	        				break;
+	        			case 'EN ATENCIÓN':
+	        				$clase_estatus='u-tags-v1 text-center g-width-100 g-brd-around g-brd-lightblue-v3 g-bg-lightblue-v3 g-font-size-default g-color-white g-rounded-50 g-py-4 g-px-15';
+	        				break;
+		        	} 
+	        	?>
+	        <tr>
+	        	<td class=" text-center g-font-size-default g-color-black g-valign-middle g-brd-top-none g-brd-bottom g-brd-2 g-brd-gray-light-v4 g-py-10 g-pl-20"><span class="<?php ?>"><?php echo $recado->id_recado; ?></span></td>
+	        	<td class=" text-center g-font-size-default g-color-black g-valign-middle g-brd-top-none g-brd-bottom g-brd-2 g-brd-gray-light-v4 g-py-10 g-pl-20"><span class="<?php ?>"><?php echo $recado->nombre.' '.$recado->apellidoP; ?></span></td>
+	        	<td class=" text-center g-font-size-default g-color-black g-valign-middle g-brd-top-none g-brd-bottom g-brd-2 g-brd-gray-light-v4 g-py-10 g-pl-20"><span class="<?php echo $clase_estatus;?>"><?php echo $recado->estatus_recado; ?></span></td>
+	        	<td class=" text-center g-font-size-default g-color-black g-valign-middle g-brd-top-none g-brd-bottom g-brd-2 g-brd-gray-light-v4 g-py-10 g-pl-20"><span class="<?php ?>"><?php echo date('d-m-Y',$recado->fecha_registro); ?></span></td>
+	        	<td class=" text-left g-font-size-default g-color-black g-valign-middle g-brd-top-none g-brd-bottom g-brd-2 g-brd-gray-light-v4 g-py-10 g-pl-20"><span class="<?php ?>"><?php echo $recado->asunto; ?></span></td>
+	        	<td class="g-font-size-default g-color-black g-valign-middle g-brd-top-none g-brd-bottom g-brd-2 g-brd-gray-light-v4 g-py-5 g-pl-5">
+	        		<?php if ($recado->notificacion_whatsapp=='SI')
+	        		{?>
+	        			<span class="g-valign-middle u-icon-v1 g-rounded-10 g-bg-green-opacity-0_1">
+						  <i class="fa fa-whatsapp g-color-green u-line-icon-pro"></i>
+						</span>
+	        		<?php } ?>
+	        		<?php if ($recado->notificacion_correo=='SI')
+	        		{?>
+	        			<span class="g-valign-middle u-icon-v1 g-rounded-10 g-bg-red-opacity-0_1 ">
+						  <i class="icon-communication-025 g-color-red u-line-icon-pro"></i>
+						</span>
+					<?php } ?>
+	        		
+	        	</td>
+	        </tr>	
+	        <?php endforeach ?>
           <tr>
             <td class="g-font-size-default g-color-black g-valign-middle g-brd-top-none g-brd-bottom g-brd-2 g-brd-gray-light-v4 g-py-10 g-pl-20">1</td>
             <td class="g-font-size-default g-color-black g-valign-middle g-brd-top-none g-brd-bottom g-brd-2 g-brd-gray-light-v4 g-py-10">Business Cards</td>
@@ -209,40 +217,96 @@
 <div class="modal fade" id="modal9" tabindex="-1" role="dialog" aria-labelledby="modal9Label" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class=" modal-header mx-auto">
+      <div class=" modal-header mx-auto" style="background: black;margin-top: 10px;color:white;">
         <h1 class="modal-title " id="exampleModalLabel">NUEVO RECADO</h1>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
       	<div class="thank-you-pop">
-      		<h3>Técnico:</h3>
+      		<form id="form_recado" method="POST" onsubmit="return guardar_recado(this);">
+      		<h3 class="g-mb-0">Técnico:</h3>
 	        <select name="tecnico" required style="height: 3em" class="custom-select w-100 u-select-v2 u-shadow-v19  g-color-black g-color-success--hover g-bg-white text-left g-rounded-30 g-pl-30 g-py-12" data-placeholder="Técnico" data-open-icon="fa fa-angle-down" data-close-icon="fa fa-angle-up">
 	        	<option selected="" disabled value="">Listado de Técnicos</option>
+	        	<?php foreach ($tecnicos as $tecnico): ?>
+	        		<option value="<?php echo $tecnico->id_tecnico; ?>"><?php echo $tecnico->nombre.' '.$tecnico->apellidoP; ?></option>
+	        	<?php endforeach ?>
+	        	
 	        </select>
-	        <h3>Cliente:</h3>
+	        <h3 class="g-mb-0">Cliente:</h3>
 	        <div id="custom-search-input">
                 <div class="input-group">
-                    <input id="cliente" name="cliente" type="text" class="form-control" placeholder="Cliente" />
+                    <input id="cliente" name="cliente" type="text" class="form-control u-shadow-v19 g-bg-white g-font-size-16 g-rounded-30 g-px-30 g-py-13" placeholder="Nombre del cliente" />
                 </div>
             </div>
-	        <h3>Tel. Cliente:</h3>
+	        <h3 class="g-mb-0 g-mt-0">Telefono del cliente:</h3>
 	        <input name="tel_cliente" type="text" class="form-control g-color-black g-rounded-30 u-shadow-v19  g-bg-white g-font-size-16 g-rounded-30 g-px-30 g-py-13 " id="Telefono" placeholder="Telefono">
 	        <!-- Textarea Expandable -->
 			<div class="form-group g-mb-20">
-				<h3 class="g-mb-10" for="inputGroup2_2">Asunto</h3>
-				<textarea name="asunto" required id="inputGroup2_3" class="form-control form-control-md u-textarea-expandable rounded-0" rows="3" placeholder="Recado..."></textarea>
+				<h3 class="g-mb-0" for="inputGroup2_2">Asunto</h3>
+				<textarea name="asunto" required id="inputGroup2_3" class="form-control form-control-md u-textarea-expandable g-rounded-30" rows="3" placeholder="Recado..." style="white-space: break-spaces"></textarea>
+				<div class="form-group g-mb-20">
+					<div class="col-md-12 row">
+						<h3 class="col-md-6 " for="inputGroup2_2">Notificar por:</h3>	
+					  	<!-- Checkboxes Group -->
+					  	<div class="btn-group justified-content">
+					    	<label class="u-check g-pl-0">
+					      		<input name="noti_whatsapp" id="noti_whatsapp" class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0" type="checkbox" value="SI">
+					      		<span class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked rounded-0">
+					      			<i class="fa fa-whatsapp g-color-green u-line-icon-pro"></i>
+									Whatsapp
+								</span>
+					    	</label>
+					    	<label class="u-check g-pl-0">
+					      		<input name="noti_correo" id="noti_correo" class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0" type="checkbox" value="SI">
+				      			<span class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">						  
+				      				<i class="icon-communication-025 g-color-red u-line-icon-pro"></i>
+									Correo electronico
+								</span>
+					    	</label>
+					  	</div>
+					  	<!-- End Checkboxes Group -->
+					</div>
+				</div>
 				<small class="form-text text-muted g-font-size-default g-mt-10">
 			    	<strong>Se registrará con la fecha:</strong><?php echo date('d-m-Y',time()); ?>
 			    </small>
 			</div>
+			</form>
 		</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-info">Enviar</button>
+        <button type="submit" form="form_recado" class="btn btn-info">Enviar</button>
       </div>
     </div>
   </div>
 </div>
+<script type="text/javascript">
+	guardar_recado = function(element){
+		console.log('element');
+		var xhttp = new XMLHttpRequest();
+
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				// document.getElementById("demo").innerHTML = this.responseText;
+				var contenedorPrincipal = document.getElementById('container-tablaRecados');
+				// document.getElementById('modal9').modal('hide');
+				$("#modal9").modal("hide");
+				document.getElementById("container-tablaRecados").innerHTML = this.responseText;
+			}
+		};
+		xhttp.open("POST", "<?php echo base_url('digital/Recados/guardar_recado'); ?>", true);
+	    var myForm = document.getElementById("form_recado");
+		var formData = new FormData(myForm);
+		var correo = document.getElementById("noti_correo").checked; 
+		var whatsapp = document.getElementById("noti_whatsapp").checked; 
+		if (correo==true){correo='SI';}else{correo='NO';}
+		if (whatsapp==true){whatsapp='SI';}else{whatsapp='NO';}
+		formData.append('notificacion_correo',correo);
+		formData.append('notificacion_whatsapp',whatsapp);
+		xhttp.send(formData);
+		return false;
+	}
+</script>

@@ -26968,21 +26968,21 @@ textarea {
   padding: 7px 15px;
 }
 
-.ui-autocomplete .ui-menu-item-wrapper.ui-state-active, .ui-autocomplete .ui-menu-item-wrapper:hover {
+/*.ui-autocomplete .ui-menu-item-wrapper.ui-state-active, .ui-autocomplete .ui-menu-item-wrapper:hover {
   color: #fff;
   background-color: #e62154;
   text-decoration: none;
-}
+}*/
 
-.ui-autocomplete .ui-menu-item:hover {
+/*.ui-autocomplete .ui-menu-item:hover {
   color: #fff;
   background-color: #e62154;
-}
+}*/
 
-.ui-autocomplete .ui-menu-item:hover .ui-menu-item-wrapper {
+/*.ui-autocomplete .ui-menu-item:hover .ui-menu-item-wrapper {
   background-color: transparent;
   border-color: transparent;
-}
+}*/
 
 .ui-autocomplete-category {
   padding: 5px 15px;

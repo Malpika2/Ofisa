@@ -29,7 +29,6 @@ class Crud_model  extends CI_Model
 			return $query->result();
 		}
 		
-		//Cuando sea solo uno el resultado manejar el objeto como $resultado[0]->indice;
 	}
 	public function getWhereJoin($tabla='',$index='*',$where=array(''),$joinTable='',$joincondition='',$escape=null){
 		$this->db->select($index);
